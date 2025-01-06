@@ -1,0 +1,175 @@
+I  couldn’t  have  written  a  book  like  this  without  the 
+help  of  a  lot  of  people.  I’d  like  to  thank  Bill  Pollock; 
+my  editors,  Laurel  Chun,  Leslie  Shen,  Greg  Poulos, 
+and  Jennifer  Grifhth-Delgado;  and  the  rest  of  the  staff 
+at  No  Starch  Press  for  their  invaluable  help.  Thanks  to 
+my  tech  reviewer,  Ari  Lacenski,  for  great  suggestions, 
+edits,  and  support. 
+
+Many  thanks  to  our  Benevolent  Dictator  For  Life,  Guido  van  Rossurn, 
+and  everyone  at  the  Python  Software  Foundation  for  their  great  work.  The 
+Python  community  is  the  best  one  I’ve  found  in  the  tech  industry. 
+
+Finally,  I  would  like  to  thank  my  family,  friends,  and  the  gang  at 
+Shotwell’s  for  not  minding  the  busy  life  I've  had  while  writing  this  book. 
+Cheers! 
+
+
+INTRODUCTION 
+
+
+“You’ve  just  done  in  two  hours  what  it  takes 
+the  three  of  us  two  days  to  do.”  My  college 
+roommate  was  working  at  a  retail  electronics 
+store  in  the  early  2000s.  Occasionally,  the  store 
+would  receive  a  spreadsheet  of  thousands  of  product 
+prices  from  its  competitor.  A  team  of  three  employees 
+
+would  print  the  spreadsheet  onto  a  thick  stack  of  paper  and  split  it  among 
+themselves.  For  each  product  price,  they  would  look  up  their  store’s  price 
+and  note  all  the  products  that  their  competitors  sold  for  less.  It  usually  took 
+a  couple  of  days. 
+
+“You  know,  I  could  write  a  program  to  do  that  if  you  have  the  original 
+hie  for  the  printouts,”  my  roommate  told  them,  when  he  saw  them  sitting 
+on  the  floor  with  papers  scattered  and  stacked  around  them. 
+
+After  a  couple  of  hours,  he  had  a  short  program  that  read  a  competitor’s
+price  from  a  hie,  found  the  product  in  the  store’s  database,  and  noted
+whether  the  competitor  was  cheaper.  He  was  still  new  to  programming,  and 
+
+
+he  spent  most  of  his  time  looking  up  documentation  in  a  programming 
+book.  The  actual  program  took  only  a  few  seconds  to  run.  My  roommate 
+and  his  co-workers  took  an  extra-long  lunch  that  day. 
+
+This  is  the  power  of  computer  programming.  A  computer  is  like  a  Swiss 
+Army  knife  that  you  can  configure  for  countless  tasks.  Many  people  spend 
+hours  clicking  and  typing  to  perform  repetitive  tasks,  unaware  that  the 
+machine  they’re  using  could  do  their  job  in  seconds  if  they  gave  it  the  right 
+instructions. 
+
+
+Whom  Is  This  Book  For? 
+
+Software  is  at  the  core  of  so  many  of  the  tools  we  use  today:  Nearly  everyone 
+uses  social  networks  to  communicate,  many  people  have  Internet-connected 
+computers  in  their  phones,  and  most  office  jobs  involve  interacting  with  a 
+computer  to  get  work  done.  As  a  result,  the  demand  for  people  who  can  code 
+has  skyrocketed.  Countless  books,  interactive  web  tutorials,  and  developer 
+boot  camps  promise  to  turn  ambitious  beginners  into  software  engineers 
+with  six-figure  salaries. 
+
+This  book  is  not  for  those  people.  It’s  for  everyone  else. 
+
+On  its  own,  this  book  won’t  turn  you  into  a  professional  software  developer
+  any  more  than  a  few  guitar  lessons  will  turn  you  into  a  rock  star.  But  if
+you’re  an  office  worker,  administrator,  academic,  or  anyone  else  who  uses  a 
+computer  for  work  or  fun,  you  will  learn  the  basics  of  programming  so  that 
+you  can  automate  simple  tasks  such  as  the  following: 
+
+•  Moving  and  renaming  thousands  of  Hies  and  sorting  them  into  folders 
+
+•  Filling  out  online  forms,  no  typing  required 
+
+•  Downloading  files  or  copy  text  from  a  website  whenever  it  updates 
+
+•  Having  your  computer  text  you  custom  notifications 
+
+•  Updating  or  formatting  Excel  spreadsheets 
+
+•  Checking  your  email  and  sending  out  prewritten  responses 
+
+These  tasks  are  simple  but  time-consuming  for  humans,  and  they’re 
+often  so  trivial  or  specific  that  there’s  no  ready-made  software  to  perform 
+them.  Armed  with  a  little  bit  of  programming  knowledge,  you  can  have 
+your  computer  do  these  tasks  for  you. 
+
+
+Conventions 
+
+This  book  is  not  designed  as  a  reference  manual;  it’s  a  guide  for  beginners.
+The  coding  style  sometimes  goes  against  best  practices  (for  example,
+some  programs  use  global  variables),  but  that’s  a  trade-off  to  make  the  code 
+simpler  to  learn.  This  book  is  made  for  people  to  write  throwaway  code,  so 
+there’s  not  much  time  spent  on  style  and  elegance.  Sophisticated  program¬ 
+ming  concepts — like  object-oriented  programming,  list  comprehensions, 
+
+
+2  Introduction 
+
+
+and  generators — aren’t  covered  because  of  the  complexity  they  add. 
+Veteran  programmers  may  point  out  ways  the  code  in  this  book  could 
+be  changed  to  improve  efficiency,  but  this  book  is  mostly  concerned  with 
+getting  programs  to  work  with  the  least  amount  of  effort. 
+
+
+What  Is  Programming? 
+
+Television  shows  and  films  often  show  programmers  furiously  typing  cryptic 
+streams  of  Is  and  Os  on  glowing  screens,  but  modern  programming  isn’t 
+that  mysterious.  Programming  is  simply  the  act  of  entering  instructions  for 
+the  computer  to  perform.  These  instructions  might  crunch  some  numbers, 
+modify  text,  look  up  information  in  files,  or  communicate  with  other  com
+over  the  Internet.
+
+All  programs  use  basic  instructions  as  building  blocks.  Here  are  a  few 
+of  the  most  common  ones,  in  English: 
+
+“Do  this;  then  do  that.” 
+
+“If  this  condition  is  true,  perform  this  action;  otherwise,  do  that  action.” 
+
+“Do  this  action  that  number  of  times.” 
+
+“Keep  doing  that  until  this  condition  is  true.” 
+
+You  can  combine  these  building  blocks  to  implement  more  intricate 
+decisions,  too.  For  example,  here  are  the  programming  instructions,  called 
+the  source  code,  for  a  simple  program  written  in  the  Python  programming 
+language.  Starting  at  the  top,  the  Python  software  runs  each  line  of  code 
+(some  lines  are  run  only  «/a  certain  condition  is  true  or  else  Python  runs 
+some  other  line)  until  it  reaches  the  bottom. 
+
+You  might  not  know  anything  about  programming,  but  you  could  probably
+make  a  reasonable  guess  at  what  the  previous  code  does  just  by  reading
+it.  First,  the  file  SecretPasswordFile.txt  is  opened  O,  and  the  secret  password  in 
+it  is  read  ©.  Then,  the  user  is  prompted  to  input  a  password  (from  the  key
+These  two  passwords  are  compared  ©,  and  if  they’re  the  same,
+the  program  prints  Access  granted  to  the  screen  ©.  Next,  the  program  checks 
+to  see  whether  the  password  is  12345  ©  and  hints  that  this  choice  might  not 
+be  the  best  for  a  password  ©.  If  the  passwords  are  not  the  same,  the
+program  prints  Access  denied  to  the  screen  ©.
+
+
+Introduction  3 
+
+
+What  Is  Python? 
+
+Python  refers  to  the  Python  programming  language  (with  syntax  rules  for 
+writing  what  is  considered  valid  Python  code)  and  the  Python  interpreter 
+software  that  reads  source  code  (written  in  the  Python  language)  and
+performs  its  instructions.  The  Python  interpreter  is  free  to  download  from
+http://python.org/,  and  there  are  versions  for  Linux,  OS  X,  and  Windows. 
+
+The  name  Python  comes  from  the  surreal  British  comedy  group  Monty 
+Python,  not  from  the  snake.  Python  programmers  are  affectionately  called 
+Pythonistas,  and  both  Monty  Python  and  serpentine  references  usually  pe
+Python  tutorials  and  documentation.
+
+Programmers  Don't  Need  to  Know  Much  Math 
+
+The  most  common  anxiety  I  hear  about  learning  to  program  is  that  people 
+think  it  requires  a  lot  of  math.  Actually,  most  programming  doesn’t  require 
+math  beyond  basic  arithmetic.  In  fact,  being  good  at  programming  isn’t 
+that  different  from  being  good  at  solving  Sudoku  puzzles. 
+
+To  solve  a  Sudoku  puzzle,  the  numbers  1  through  9  must  be  filled  in  for 
+each  row,  each  column,  and  each  3x3  interior  square  of  the  full  9x9  board. 
+You  find  a  solution  by  applying  deduction  and  logic  from  the  starting  num¬ 
+bers.  For  example,  since  5  appears  in  the  top  left  of  the  Sudoku  puzzle  shown 
+in  Figure  0-1,  it  cannot  appear  elsewhere  in  the  top  row,  in  the  leftmost  column
+or  in  the  top-left  3x3  square.  Solving  one  row,  column,  or  square  at  a
+time  will  provide  more  number  clues  for  the  rest  of  the  puzzle. 

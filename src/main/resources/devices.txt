@@ -1,0 +1,9 @@
+Device Name: Laptop
+Serial Number: DS00001
+------------
+Device Name: Printer
+Serial Number: DS00002
+------------
+Device Name: Monitor
+Serial Number: DS00003
+------------
