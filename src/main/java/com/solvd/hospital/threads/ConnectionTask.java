@@ -4,7 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 class ConnectionTask implements Runnable {
-    private static final Logger log = LogManager.getLogger(ConnectionTask.class);
+    private static final Logger LOGGER = LogManager.getLogger(ConnectionTask.class);
     private final ConnectionPool pool;
 
     public ConnectionTask(ConnectionPool pool) {
@@ -13,17 +13,21 @@ class ConnectionTask implements Runnable {
 
     @Override
     public void run() {
+        Connection connection = null;
         try {
-            log.info("{} - Waiting for connection...", Thread.currentThread().getName());
-            Connection connection = pool.acquire();
-            log.info("{} - Acquired connection with name: {}", Thread.currentThread().getName(), connection.getName());
+            LOGGER.info("{} - Waiting for connection...", Thread.currentThread().getName());
+            connection = pool.acquire();
+            LOGGER.info("{} - Acquired connection with name: {}", Thread.currentThread().getName(), connection.getName());
 
-            Thread.sleep(6000);
+            Thread.sleep(4000);
 
-            log.info("{} - Releasing connection.", Thread.currentThread().getName());
-            pool.release(connection);
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            LOGGER.error("Connection interrupted {}", e.getMessage());
+        } finally {
+            if (connection != null) {
+                LOGGER.info("{} - Releasing connection.", Thread.currentThread().getName());
+                pool.release(connection);
+            }
         }
     }
 }

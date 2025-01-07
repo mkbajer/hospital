@@ -54,13 +54,7 @@ Initialize pool with 5 sizes. Load Connection Pool using threads and Thread Pool
 The program should wait as well.
 Create some threads using CompletableFuture - just in main method
 
-release your connection inside the "finally" block
-replace e.printStackTrace(); with LOGGER.error
-rename "private static final Logger log" to "private static final Logger LOGGER"
-wait at least in one place of your completed future (using method named join())
-
-you repository is empty, you need to "upload" you project there
-you need to play around with branches creating, pull requests and conflict resolving (using merge and rebase)
+branches creating, pull requests and conflict resolving (using merge and rebase)
 
  */
 

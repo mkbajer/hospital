@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.stream.IntStream;
 
 public class ConnectionPoolExample {
-    private static final Logger log = LogManager.getLogger(ConnectionPoolExample.class);
+    private static final Logger LOGGER = LogManager.getLogger(ConnectionPoolExample.class);
 
     public static void main(String[] args) throws InterruptedException {
 
@@ -22,14 +22,16 @@ public class ConnectionPoolExample {
                     .mapToObj(i -> new ConnectionTask(pool))
                     .forEach(executor::submit);
 
-            CompletableFuture.runAsync(() -> log.info("CompletableFuture Task 1 running"));
-            CompletableFuture.runAsync(() -> log.info("CompletableFuture Task 2 running"));
-            CompletableFuture.runAsync(() -> log.info("CompletableFuture Task 3 running"));
+            CompletableFuture<Void> future1 = CompletableFuture.runAsync(() -> System.out.println("CompletableFuture Task 1 running"));
+            CompletableFuture<Void> future2 = CompletableFuture.runAsync(() -> System.out.println("CompletableFuture Task 2 running"));
+            CompletableFuture<Void> future3 = CompletableFuture.runAsync(() -> System.out.println("CompletableFuture Task 3 running"));
+
+            future1.join();
 
             executor.shutdown();
             executor.awaitTermination(8, TimeUnit.SECONDS);
         }
 
-        log.info("All tasks completed.");
+        LOGGER.info("All tasks completed.");
     }
 }
