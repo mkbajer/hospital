@@ -15,8 +15,6 @@ import com.solvd.hospital.medicines.Medicine;
 import com.solvd.hospital.medicines.MedicineService;
 import com.solvd.hospital.patients.MedicalHistory;
 import com.solvd.hospital.patients.Patient;
-import com.solvd.hospital.patients.PatientNotFoundException;
-import com.solvd.hospital.patients.PatientOptional;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
@@ -24,17 +22,12 @@ import org.apache.logging.log4j.Logger;
 
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /*
 
@@ -44,17 +37,9 @@ Patient - Variable 'timeSlots' is never used
 Reception - Parameter 'date' is never used
 DeviceArchive - Exception 'java.io.IOException' is never thrown in the method
 (optional) Create custom LinkedList class with generic. (this class must implement the List interface)
+
 try to create any branches (using console commands), add any code there and open a pull request to the main branch
 try to simulate conflicts and resolve them with the help of - merge - rebase
-Create 2 Threads using Runnable and Thread.
-Create Connection Pool: create a class named Connection which has any methods
-(these methods can just return any mock (hardcoded) data, like public String getName() {return "John";}).
-Initialize pool with 5 sizes. Load Connection Pool using threads and Thread Pool(7 threads).
-5 threads should be able to get the connection. 2 Threads should wait for the next available connection.
-The program should wait as well.
-Create some threads using CompletableFuture - just in main method
-
-branches creating, pull requests and conflict resolving (using merge and rebase)
 
  */
 
@@ -331,105 +316,6 @@ public class Main {
 
         treatment.addTreatment(LocalDateTime.now(), "Feeling better");
 
-        List<String> names = List.of("Jack", "Jones", "Agnes", "Inez", "Dave", "Clark", "Anthony", "Gertruda", "Sophie",
-                "Cleo", "Damian", "Agnes");
-
-        List<String> filteredNames = names.stream()
-                .filter(name -> name.startsWith("A") || name.startsWith("D"))
-                .toList();
-        log.info("Filtered names: {}", filteredNames);
-
-        List<String> upperCaseNames = names.stream()
-                .filter(name -> name.contains("o"))
-                .map(String::toUpperCase)
-                .toList();
-        log.info("Uppercase names containing 'o': {}", upperCaseNames);
-
-        names.stream()
-                .filter(name -> name.endsWith("a") || name.contains("hie"))
-                .flatMap(str -> Stream.of(str.charAt(0)))
-                .forEach(log::info);
-
-        List<String> lowerCaseNamesPeek = names.stream()
-                .filter(name -> name.contains("z"))
-                .peek(log::debug)
-                .map(String::toLowerCase)
-                .toList();
-        log.info("Lowercase names containing 'z': {}", lowerCaseNamesPeek);
-
-        var count = names.stream()
-                .peek(log::debug)
-                .filter(name -> name.startsWith("A"))
-                .count();
-        log.debug("Count of names starting with 'A': {}", count);
-
-        List<String> olderPatients = neurology.getPatients().stream()
-                .filter(patient -> patient.getAge() > 60)
-                .map(Patient::getName)
-                .toList();
-        log.info("Patients older than 60: {}", olderPatients);
-
-        boolean surnameWithC = neurology.getPatients().stream()
-                .peek(p -> log.debug("Check: {}", p.getSurname()))
-                .anyMatch(patient -> patient.getSurname().startsWith("C"));
-        log.info("Patient with surname starting from 'C': {}", surnameWithC);
-
-        boolean allAdults = neurology.getPatients().stream()
-                .allMatch(patient -> patient.getAge() >= 18);
-        log.info("Are all patients adults? {}", allAdults);
-
-        Optional<Patient> firstOlderThan50 = neurology.getPatients().stream()
-                .filter(patient -> patient.getAge() > 50)
-                .findFirst();
-        firstOlderThan50.ifPresent(patient ->
-                log.info("First patient older than 50: {}", patient.getName())
-        );
-
-        Map<Boolean, List<Patient>> partitionedByNameLength = neurology.getPatients().stream()
-                .peek(patient -> log.debug("Checking name: {}", patient.getName()))
-                .collect(Collectors.partitioningBy(patient -> patient.getName().length() > 5));
-        log.info("Patients divided by name length (> 5) : {}", partitionedByNameLength.get(true));
-
-        try {
-            Optional<Patient> result = PatientOptional.findPatientBySurname(pulmonology, "Smiths");
-            Patient patient = result.orElseThrow(() -> new PatientNotFoundException("Not found!"));
-            log.info("Patient Found: {}", patient.getName());
-        } catch (PatientNotFoundException e) {
-            log.error(e.getMessage());
-        }
-
-        try {
-
-            Class<?> employeeClass = Class.forName("com.solvd.hospital.employees.Doctor");
-
-            log.info("Fields:");
-            Arrays.stream(employeeClass.getDeclaredFields())
-                    .forEach(field -> log.info("Name {} , Type: {} , Modifiers {}",
-                            field.getName(), field.getType(), Modifier.toString(field.getModifiers())));
-
-            log.info("Constructors:");
-            Arrays.stream(employeeClass.getConstructors())
-                    .forEach(constructor -> log.info("Constructor: {} , Parameters: {}",
-                            constructor.getName(), Arrays.toString(constructor.getParameterTypes())));
-
-            log.info("Methods:");
-            Arrays.stream(employeeClass.getMethods())
-                    .forEach(method -> log.info("Name: {} , Return Type: {} , Parameters: {} , Modifiers: {}",
-                            method.getName(), method.getReturnType(),
-                            Arrays.toString(method.getParameterTypes()),
-                            Modifier.toString(method.getModifiers())));
-
-            Constructor<?> constructor = employeeClass.getConstructor(
-                    String.class, String.class, String.class, Hierarchy.class);
-
-            Object employee = constructor.newInstance("Tester", "Tested", "Tester", Hierarchy.LEADER);
-
-            Method displayInfo = employeeClass.getMethod("displayInfo");
-            displayInfo.invoke(employee);
-
-        } catch (Exception e) {
-            log.error("Reflection failed: ", e);
-        }
         List<Branch> branches = Arrays.asList(neurology, pulmonology);
         List<Patient> allPatients = branches.stream()
                 .map(Branch::getPatients)
